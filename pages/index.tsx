@@ -1,5 +1,5 @@
 import React from "react";
-import ProductList from "../components/layouts/Products/ProductList";
+import ProductList from "../components/Products/ProductList";
 
 function HomePage() {
   return <ProductList />;
