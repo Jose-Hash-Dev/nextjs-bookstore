@@ -1,7 +1,14 @@
+import book1 from './Images/book1.jpg';
+import book2 from './Images/book2.jpg';
+import book3 from './Images/book3.jpg';
+import book4 from './Images/book4.jpg';
+import book5 from './Images/book5.jpg';
+import book6 from './Images/book6.jpg';
+
 export const books = [
   {
     id: 1,
-    image: "https://images-na.ssl-images-amazon.com/images/I/81b6e-dc41L.jpg",
+    image: "book1",
     price: "17",
     title: "Crime and Punishment",
     description:
@@ -9,7 +16,7 @@ export const books = [
   },
   {
     id: 2,
-    image: "https://images-na.ssl-images-amazon.com/images/I/51pEx74UarS.jpg",
+    image: "book2",
     price: "10",
     title: "Inferno",
     description:
@@ -18,7 +25,7 @@ export const books = [
   },
   {
     id: 3,
-    image: "https://images-na.ssl-images-amazon.com/images/I/91zOf+6I60L.jpg",
+    image: "book3",
     price: "5",
     title: "The Lost Symbol",
     description:
@@ -27,7 +34,7 @@ export const books = [
   },
   {
     id: 4,
-    image: "https://images-na.ssl-images-amazon.com/images/I/81hKPqaR-BL.jpg",
+    image: "book4",
     price: "25",
     title: "A Tale of Two Cities",
     description:
@@ -35,7 +42,7 @@ export const books = [
   },
   {
     id: 5,
-    image: "https://images-na.ssl-images-amazon.com/images/I/A15FFg6aNLL.jpg",
+    image: "book5",
     price: "15",
     title: "The Da Vinci Code",
     description:
@@ -44,7 +51,7 @@ export const books = [
   },
   {
     id: 6,
-    image: "https://images-na.ssl-images-amazon.com/images/I/711uKy+sn2L.jpg",
+    image: "book6",
     price: "24",
     title: "The Gambler",
     description:
