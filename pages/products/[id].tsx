@@ -11,7 +11,6 @@ import {
 import Navigation from "../../components/Navigation/Navigation";
 import Image from "next/image";
 import { Rating, Button, TextField } from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Book } from "./types";
 
 export const getStaticPaths = async () => {
@@ -39,15 +38,14 @@ export const getStaticProps = async (context: { params: { id: number } }) => {
   };
 };
 
-const ProductViewer = (book: Book) => {
+const ProductViewer = (props: {book: Book}) => {
   return (
     <>
       <Navigation />
       <ProductDetailContainer>
-        <Title>{book.title}</Title>
-        <Image src={book.image} alt={book.alt} width={350} height={500} />
-        <Description>{book.description}</Description>
-        <p>{book.id}</p>
+        <Title>{props.book.title}</Title>
+        <Image src={props.book.image} alt={props.book.alt} width={350} height={500} />
+        <Description>{props.book.description}</Description>
         <PriceAmountContainer>
           <Amount>
             <TextField
@@ -58,11 +56,11 @@ const ProductViewer = (book: Book) => {
             />
           </Amount>
           <PriceRatingContainer>
-            <Price>{book.price}$</Price>
+            <Price>{props.book.price}$</Price>
             <Rating name="simple-controlled" />
           </PriceRatingContainer>
         </PriceAmountContainer>
-        <Button variant="contained" endIcon={<AddShoppingCartIcon />}>
+        <Button variant="contained" >
           Add To Cart
         </Button>
       </ProductDetailContainer>

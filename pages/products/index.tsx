@@ -12,21 +12,19 @@ import { Book } from "./types";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/books");
-  const books = await res.json();
+  let books = await res.json();
+  console.log(books);
 
   return {
     props: { books },
   };
 };
 
-// {books}: ProductList - ProductListin' in icindeki book
-// books: ProductList - ProductList itself
-
-const ProductListViewer = (books: Book[]) => {
+const ProductListViewer = (props: { books: Book[] }) => {
   return (
     <div>
       <Navigation />
-      {books.map((book: Book) => (
+      {props.books.map((book: Book) => (
         <div key={book.id}>
           <ProductListStyle>
             <Link href={"/products/" + book.id} key={book.id}>
