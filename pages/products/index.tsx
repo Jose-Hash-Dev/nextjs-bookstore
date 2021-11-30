@@ -8,7 +8,7 @@ import {
   Title,
 } from "./styles/ProductListStyle";
 import Navigation from "../../components/Navigation/Navigation";
-import { Book } from "./types";
+import { BookType } from "./types";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/books");
@@ -19,11 +19,11 @@ export const getStaticProps = async () => {
   };
 };
 
-const ProductListViewer = (props: { books: Book[] }) => {
+const ProductListViewer = (props: { books: BookType[] }) => {
   return (
     <div>
       <Navigation />
-      {props.books.map((book: Book) => (
+      {props.books.map((book: BookType) => (
         <div key={book.id}>
           <ProductListStyle>
             <Link href={"/products/" + book.id} key={book.id}>
