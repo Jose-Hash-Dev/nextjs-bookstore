@@ -6,26 +6,30 @@ import {
   Price,
   ProductListStyle,
   Title,
-} from "../../styles/products/ProductListStyle";
+} from "./styles/ProductListStyle";
 import Navigation from "../../components/Navigation/Navigation";
+import { Book } from "./types";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/books");
-  const data = await res.json();
+  const books = await res.json();
 
   return {
-    props: { books: data },
+    props: { books },
   };
 };
 
-const ProductList = ({ books }: any) => {
+// {books}: ProductList - ProductListin' in icindeki book
+// books: ProductList - ProductList itself
+
+const ProductListViewer = (books: Book[]) => {
   return (
     <div>
       <Navigation />
-      {books.map((book: any) => (
+      {books.map((book: Book) => (
         <div key={book.id}>
           <ProductListStyle>
-            <Link href={'/products/' +book.id} key={book.id}>
+            <Link href={"/products/" + book.id} key={book.id}>
               <Image src={book.image} alt={book.alt} width={350} height={500} />
             </Link>
             <Details>
@@ -39,4 +43,4 @@ const ProductList = ({ books }: any) => {
   );
 };
 
-export default ProductList;
+export default ProductListViewer;

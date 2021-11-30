@@ -7,17 +7,18 @@ import {
   Description,
   PriceRatingContainer,
   Amount,
-} from "../../styles/products/ProductDetailStyle";
+} from "./styles/ProductDetailStyle";
 import Navigation from "../../components/Navigation/Navigation";
 import Image from "next/image";
 import { Rating, Button, TextField } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Book } from "./types";
 
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:3000/books");
   const data = await res.json();
 
-  const paths = data.map((book: any) => {
+  const paths = data.map((book: Book) => {
     return {
       params: { id: book.id.toString() },
     };
@@ -28,17 +29,17 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context: any) => {
+export const getStaticProps = async (context: { params: { id: number } }) => {
   const id = context.params.id;
   const res = await fetch("http://localhost:3000/books/" + id);
-  const data = await res.json();
+  const book = await res.json();
 
   return {
-    props: { book: data },
+    props: { book },
   };
 };
 
-const ProductDetail = ({ book }: any) => {
+const ProductViewer = (book: Book) => {
   return (
     <>
       <Navigation />
@@ -46,6 +47,7 @@ const ProductDetail = ({ book }: any) => {
         <Title>{book.title}</Title>
         <Image src={book.image} alt={book.alt} width={350} height={500} />
         <Description>{book.description}</Description>
+        <p>{book.id}</p>
         <PriceAmountContainer>
           <Amount>
             <TextField
@@ -68,4 +70,4 @@ const ProductDetail = ({ book }: any) => {
   );
 };
 
-export default ProductDetail;
+export default ProductViewer;
