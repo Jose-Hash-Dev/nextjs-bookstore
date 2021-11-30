@@ -12,8 +12,7 @@ import { Book } from "./types";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/books");
-  let books = await res.json();
-  console.log(books);
+  const books = await res.json();
 
   return {
     props: { books },
