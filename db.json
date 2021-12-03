@@ -45,5 +45,30 @@
       "title": "The Gambler",
       "description": "The Gambler treated a subject Fyodor Dostoevsky himself was familiar with: gambling. Fyodor Dostoevsky gambled for the first time at the tables at Wiesbaden in 1863. From that time till 1871, when his passion for gambling subsided, he played at Baden-Baden, Homburg, and Saxon-les-Bains frequently, often beginning by winning a small amount of money and losing far more in the end. He first mentions his interest in gambling in a letter he sent to his first wife's sister on 1 September 1863 describing his initial success."
     }
+  ],
+  "cart": [
+    {
+      "id": 1,
+      "image": "/images/book1.jpg",
+      "price": "17",
+      "title": "Crime and Punishment",
+      "description": "Crime and Punishment focuses on the mental anguish and moral dilemmas of Rodion Raskolnikov, an impoverished ex-student in Saint Petersburg who formulates a plan to kill an unscrupulous pawnbroker for her money. Before the killing, Raskolnikov believes that with the money he could liberate himself from poverty and go on to perform great deeds. However, once it is done he finds himself racked with confusion, paranoia, and disgust for his actions."
+    },
+    {
+      "id": 2,
+      "image": "/images/book2.jpg",
+      "price": "10",
+      "title": "Inferno",
+      "description": "This book 'Inferno' follows his usual writing style, format, and layout. His stories are always well-written and clearly, a lot of research goes into them. This book certainly raises some complex and difficult issues around mankind's growing population and the earth's limited resources, and all of this get's entwined in religion, symbols, Italian history, and the works of Dante.",
+      "alt": "Inferno (Robert Langdon) (9780307474278): Brown, Dan:  Books"
+    },
+    {
+      "id": 3,
+      "image": "/images/book3.jpg",
+      "price": "5",
+      "title": "The Lost Symbol",
+      "description": "The Lost Symbol is a masterstroke of storytelling--a deadly race through a real-world labyrinth of codes, secrets, and unseen truths . . . all under the watchful eye of Brown’s most terrifying villain to date. Set within the hidden chambers, tunnels, and temples of Washington, D.C.,",
+      "alt": "A Complete List of Dan Brown Books and Novels Rated From Best To Worst"
+    }
   ]
 }
