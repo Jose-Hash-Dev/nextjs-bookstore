@@ -1,42 +1,92 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+import WishlistIcon from "./icons/wishlist/wishlistIcon";
 import {
   Details,
   Price,
   ProductListStyle,
   Title,
-} from "./styles/ProductListStyle";
-import Navigation from "../../components/Navigation/Navigation";
-import { BookType } from "./types";
+  IconsContainer,
+  LinkContainer,
+  Image,
+} from "./styles/productListStyle";
+import { Grid, Button } from "@mui/material";
+import { BookType } from "../types";
+import { GetServerSideProps } from "next";
+import { Store } from "../../lib/Store";
+import axios from "axios";
 
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/books");
-  const books = await res.json();
-
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch("http://localhost:3000/api/products");
+  const data = await res.json();
   return {
-    props: { books },
+    props: {
+      bookList: data,
+    },
   };
 };
 
-const ProductListViewer = (props: { books: BookType[] }) => {
+const ProductListViewer = (props: { bookList: BookType[] }) => {
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
+  const addToCartHandler = async (product: any) => {
+    const existItem = state.cart.cartItems.find(
+      (x: any) => x._id === product._id
+    );
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+  };
+
   return (
-    <div>
-      <Navigation />
-      {props.books.map((book: BookType) => (
-        <div key={book.id}>
+    <Grid width={1000} container>
+      {props.bookList.map((book: any) => (
+        <Grid marginBottom={1.5} item md={3} xs={1.5} key={book.id}>
           <ProductListStyle>
-            <Link href={"/products/" + book.id} key={book.id}>
-              <Image src={book.image} alt={book.alt} width={350} height={500} />
-            </Link>
+            {book.title.length > 20 ? (
+              <Title style={{ textDecoration: "none" }}>
+                {book.title.substring(0, 20)}...
+              </Title>
+            ) : (
+              <Title style={{ textDecoration: "none" }}>{book.title}</Title>
+            )}
+            <LinkContainer>
+              <Link href={`/products/${book._id}`} passHref>
+                <Image src={`${book.image}`} alt={book.alt} />
+              </Link>
+            </LinkContainer>
             <Details>
-              <Title>{book.title}</Title>
+              <IconsContainer>
+                <WishlistIcon />
+              </IconsContainer>
               <Price>{book.price}$</Price>
             </Details>
+            {cart.cartItems.find((item: any) => item._id === book._id) ? (
+              <Button
+                startIcon={<LocalMallIcon />}
+                size="small"
+                variant="outlined"
+                sx={{ fontSize: 12.5 }}
+                color="success"
+              >
+                Added
+              </Button>
+            ) : (
+              <Button
+                size="small"
+                variant="outlined"
+                sx={{ fontSize: 12.5 }}
+                onClick={() => addToCartHandler(book)}
+              >
+                ADD
+              </Button>
+            )}
           </ProductListStyle>
-        </div>
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
 
