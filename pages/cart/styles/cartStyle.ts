@@ -39,3 +39,8 @@ export const CostText = styled(Typography)`
   font-size: 20px;
   font-family: Verdana, serif;
 `;
+export const TitleLinkStyle = styled(Typography)`
+  font-family: Verdana, serif;
+  font-size: 16px;
+  cursor: pointer;
+`;

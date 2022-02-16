@@ -9,6 +9,7 @@ import {
   CardActionsContainer,
   SubTotalContainer,
   CostText,
+  TitleLinkStyle,
 } from "./styles/cartStyle";
 import Checkout from "./buttons/checkout/checkout";
 import { Store } from "../../lib/Store";
@@ -24,13 +25,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import RemoveProductIcon from "./icons/remove";
 import WishListButton from "./buttons/actionButtons/wishlist";
 import BackToShopping from "./buttons/backToShopping";
+import Link from "next/link";
 
 const CartView = (props: { cart: BookType[] }) => {
   const { state, dispatch } = useContext(Store);
@@ -93,7 +94,9 @@ const CartView = (props: { cart: BookType[] }) => {
                       <Image src={item.image} />
                     </TableCell>
                     <TableCell align="left" component="th" scope="row">
-                      <TextStyle>{item.title}</TextStyle>
+                      <Link href={`/products/${item._id}`} passHref>
+                        <TitleLinkStyle>{item.title}</TitleLinkStyle>
+                      </Link>
                       <DetailTextStyle>{item.author}</DetailTextStyle>
                     </TableCell>
 
