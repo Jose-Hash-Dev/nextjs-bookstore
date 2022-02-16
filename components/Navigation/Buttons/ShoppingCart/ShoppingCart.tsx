@@ -1,11 +1,18 @@
-import React from "react";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import React, { useContext } from "react";
+import { ShoppingCartStyle } from "./ShoppingCartStyle";
+import { Store } from "../../../../lib/Store";
+import { Badge } from "@mui/material";
 
-function ShoppingCartButton() {
+function ShoppingCart() {
+  const { state } = useContext(Store);
+  const { cart } = state;
   return (
     <>
-      <ShoppingCartIcon />
+      <Badge badgeContent={cart.cartItems.length} color="secondary">
+        <ShoppingCartStyle color="primary" />
+      </Badge>
     </>
+
   );
 }
-export default ShoppingCartButton;
+export default ShoppingCart;
