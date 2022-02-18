@@ -39,7 +39,6 @@ export const Image = styled.img`
 
 export const ProfileText = styled(Typography)`
   font-size: 16px;
-  font-family: Verdana,serif;
+  font-family: Verdana, serif;
   margin-right: 10px;
-  
 `;
