@@ -10,7 +10,6 @@ const Checkout = () => {
         <Button variant="contained">Checkout</Button>
       </CheckoutStyle>
     </Link>
-
   );
 };
 
