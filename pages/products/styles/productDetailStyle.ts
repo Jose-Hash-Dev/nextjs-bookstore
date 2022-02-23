@@ -22,7 +22,6 @@ export const AmountAddContainer = styled.div`
   display: flex;
   justify-content: start;
   position: absolute;
-  //margin-top: 10px;
   bottom: 25px;
   margin-left: 12px;
 `;
