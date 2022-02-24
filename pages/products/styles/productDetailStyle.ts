@@ -25,19 +25,16 @@ export const AmountAddContainer = styled.div`
   bottom: 25px;
   margin-left: 12px;
 `;
-
 export const BookInfoContainer = styled.div`
   margin-left: 12px;
   text-align: start;
   margin-top: 10px;
-  
 `;
 export const BookInfoText = styled(Typography)`
   font-family: Verdana,serif;
   font-size: 16px;
   font-style: italic;
 `;
-
 export const Title = styled.div`
   font-size: 20px;
   color: #000080;
@@ -62,7 +59,6 @@ export const Image = styled.img`
   height: 450px;
   border-radius: 5px;
 `;
-
 export const DividerStyle = styled(Divider)`
   margin-top: 10px;
 `;
