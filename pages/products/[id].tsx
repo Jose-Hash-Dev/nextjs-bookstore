@@ -1,74 +1,99 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   ProductDetailContainer,
   Title,
-  PriceAmountContainer,
   Price,
   Description,
-  PriceRatingContainer,
-  Amount,
-} from "./styles/ProductDetailStyle";
-import Navigation from "../../components/Navigation/Navigation";
-import Image from "next/image";
-import { Rating, Button, TextField } from "@mui/material";
-import { GetStaticProps } from "next";
-import { BookType } from "./types";
+  DividerStyle,
+  Image,
+  TitleDescPriceContainer,
+  AmountAddContainer,
+  BookDetailContainer,
+  BookInfoContainer,
+  BookInfoText,
+} from "./styles/productDetailStyle";
+import {
+  Button,
+  Grid,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import { GetServerSideProps } from "next";
+import axios from "axios";
+import { Store } from "../../lib/Store";
 
-export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:3000/books");
-  const data = await res.json();
-
-  const paths = data.map((book: BookType) => {
-    return {
-      params: { id: book.id.toString() },
-    };
-  });
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const id = params?.id;
+  const res = await axios.get(`http://localhost:3000/api/products/${id}`);
   return {
-    paths,
-    fallback: false,
+    props: {
+      book: res.data,
+    },
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const id = context?.params?.id;
-  const res = await fetch("http://localhost:3000/books/" + id);
-  const book = await res.json();
+const ProductViewer = (props: { book: any }) => {
+  const [quantity, setQuantity] = useState(1);
+  const { dispatch } = useContext(Store);
+  const { state } = useContext(Store);
+  const { cart } = state;
 
-  return {
-    props: { book },
+  const addToCartHandler = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3000/api/products/${props.book._id}`
+    );
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...props.book, quantity: quantity },
+    });
   };
-};
 
-const ProductViewer = (props: { book: BookType }) => {
+  const onChangeHandler = (event: { target: { value: any } }) => {
+    setQuantity(Number(event.target.value));
+  };
+
   return (
-    <>
-      <Navigation />
+    <Grid height={500} width={1000} container>
       <ProductDetailContainer>
-        <Title>{props.book.title}</Title>
-        <Image
-          src={props.book.image}
-          alt={props.book.alt}
-          width={350}
-          height={500}
-        />
-        <Description>{props.book.description}</Description>
-        <PriceAmountContainer>
-          <Amount>
-            <TextField
-              label="Amount"
-              id="outlined-size-small"
-              defaultValue="1"
-              size="small"
-            />
-          </Amount>
-          <PriceRatingContainer>
+        <Image src={`${props.book.image}`} alt={props.book.alt} />
+        <BookDetailContainer>
+          <TitleDescPriceContainer>
+            <Title>{props.book.title}</Title>
             <Price>{props.book.price}$</Price>
-            <Rating name="simple-controlled" />
-          </PriceRatingContainer>
-        </PriceAmountContainer>
-        <Button variant="contained">Add To Cart</Button>
+            <Description>{props.book.description}</Description>
+            <DividerStyle />
+          </TitleDescPriceContainer>
+          <BookInfoContainer>
+            <BookInfoText>Author: {props.book.author}</BookInfoText>
+            <BookInfoText>Language:</BookInfoText>
+            <BookInfoText>Category:</BookInfoText>
+            <BookInfoText>Stock: {props.book.stock}</BookInfoText>
+            <BookInfoText>Release Year:</BookInfoText>
+          </BookInfoContainer>
+          <DividerStyle />
+          <AmountAddContainer>
+            <Select
+              sx={{ width: 60, height: 35 }}
+              value={quantity}
+              onChange={onChangeHandler}
+            >
+              {[...Array(props.book.stock).keys()].map((x) => (
+                <MenuItem key={x + 1} value={x + 1}>
+                  {x + 1}
+                </MenuItem>
+              ))}
+            </Select>
+            <Button
+              variant="contained"
+              onClick={addToCartHandler}
+              sx={{ marginLeft: 3, width: 110, height: 35 }}
+            >
+              Add To Cart
+            </Button>
+          </AmountAddContainer>
+        </BookDetailContainer>
       </ProductDetailContainer>
-    </>
+    </Grid>
   );
 };
 
