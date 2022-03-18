@@ -12,22 +12,18 @@ import {
   BookInfoContainer,
   BookInfoText,
 } from "./styles/productDetailStyle";
-import {
-  Button,
-  Grid,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Button, Grid, Select, MenuItem } from "@mui/material";
 import { GetServerSideProps } from "next";
-import axios from "axios";
-import { Store } from "../../lib/Store";
+import { Store } from "../../utils/Store";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.id;
-  const res = await axios.get(`http://localhost:3000/api/products/${id}`);
+  const res = await fetch(`http://localhost:3000/api/products/${id}`);
+  const data = await res.json();
+
   return {
     props: {
-      book: res.data,
+      book: data,
     },
   };
 };
@@ -39,9 +35,6 @@ const ProductViewer = (props: { book: any }) => {
   const { cart } = state;
 
   const addToCartHandler = async () => {
-    const { data } = await axios.get(
-      `http://localhost:3000/api/products/${props.book._id}`
-    );
     dispatch({
       type: "CART_ADD_ITEM",
       payload: { ...props.book, quantity: quantity },
@@ -65,10 +58,10 @@ const ProductViewer = (props: { book: any }) => {
           </TitleDescPriceContainer>
           <BookInfoContainer>
             <BookInfoText>Author: {props.book.author}</BookInfoText>
-            <BookInfoText>Language:</BookInfoText>
+            <BookInfoText>Cover: {props.book.covers[0].name}</BookInfoText>
             <BookInfoText>Category:</BookInfoText>
             <BookInfoText>Stock: {props.book.stock}</BookInfoText>
-            <BookInfoText>Release Year:</BookInfoText>
+            <BookInfoText>Publisher: {props.book.publishers[0].name}</BookInfoText>
           </BookInfoContainer>
           <DividerStyle />
           <AmountAddContainer>
