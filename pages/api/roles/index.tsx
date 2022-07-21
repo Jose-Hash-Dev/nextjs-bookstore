@@ -10,14 +10,8 @@ export default async function handler(
   const { method } = req;
   if (method === "GET") {
     try {
-      const books = await prisma.book.findMany({
-        include: {
-          languages: true,
-          categories: true,
-          authors: true,
-        },
-      });
-      res.status(200).json(books);
+      const roles = await prisma.role.findMany();
+      res.status(200).json(roles);
     } catch (err) {
       res.status(500).json(err);
     }

@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 
 export const NavigationContainer = styled.div`
   height: 60px;
-  //width: 400px;
+  min-width: 1000px;
   display: flex;
   align-items: center;
   justify-content: space-between;

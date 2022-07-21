@@ -1,20 +1,19 @@
 import React from "react";
-import { AppBar } from "@mui/material";
 import NavigationView from "../../navigation";
+import { AppBarStyle } from "./style";
 
 const AppBarView = () => {
   return (
     <div>
-      <AppBar
+      <AppBarStyle
         position="fixed"
         sx={{
           width: `calc(100% - ${240}px)`,
           ml: `${240}px`,
-          color: "green",
         }}
       >
         <NavigationView />
-      </AppBar>
+      </AppBarStyle>
     </div>
   );
 };

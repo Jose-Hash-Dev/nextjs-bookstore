@@ -4,6 +4,7 @@ import { Box, MenuItem } from "@mui/material";
 
 export const CartIconStyle = styled(LocalMallIcon)`
   font-size: 22px;
+  color: white;
 `;
 export const BoxContainer = styled(Box)`
   display: flex;

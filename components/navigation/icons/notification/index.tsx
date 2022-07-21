@@ -7,7 +7,7 @@ function NotificationIcon() {
     <>
       <IconButton>
         <Badge badgeContent={4} color="error">
-          <NotificationStyle color="primary"/>
+          <NotificationStyle color="primary" />
         </Badge>
       </IconButton>
     </>

@@ -14,34 +14,29 @@ export default async function handler(
 
   if (method === "GET") {
     try {
-      const book = await prisma.book
+      const order = await prisma.order
         .findUnique({
           where: {
             id: Number(id),
           },
-          include: {
-            languages: true,
-            categories: true,
-            authors: true,
-          },
         })
         .catch((err) => console.log(err));
 
-      res.status(200).json(book);
+      res.status(200).json(order);
     } catch (err) {
       res.status(500).json(err);
     }
   }
   if (method === "DELETE") {
     try {
-      const book = await prisma.book
+      const order = await prisma.order
         .delete({
           where: {
             id: Number(id),
           },
         })
         .catch((err) => console.log(err));
-      res.status(200).json(book);
+      res.status(200).json(order);
     } catch (err) {
       res.status(500).json(err);
     }
