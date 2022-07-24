@@ -1,10 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Language from "../../../models/language";
-import dbConnect from "../../../utils/dbConnect";
+import { PrismaClient } from "@prisma/client";
 
-dbConnect().then((result) => {
-  return console.log(result);
-});
+const prisma = new PrismaClient();
 
 export default async function getSingleProduct(
   req: NextApiRequest,
@@ -14,9 +11,17 @@ export default async function getSingleProduct(
     method,
     query: { id },
   } = req;
+
   if (method === "GET") {
     try {
-      const language = await Language.findById(id);
+      const language = await prisma.language.findUnique({
+        where: {
+          id: Number(id),
+        },
+        include: {
+          books: true,
+        },
+      });
       res.status(200).json(language);
     } catch (err) {
       res.status(500).json(err);

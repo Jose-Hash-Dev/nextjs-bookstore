@@ -1,0 +1,115 @@
+datasource db {
+ provider = "sqlite"
+ url      = "file:./dev.db"
+}
+
+generator client {
+ provider = "prisma-client-js"
+}
+
+model Book {
+ id          Int      @id @default(autoincrement())
+ title       String
+ price       Int
+ description String
+ image       String
+ stock       Int
+ pages       Int
+ createdAt   DateTime @default(now())
+
+ languages  Language[]
+ categories Category[]
+ authors    Author[]
+ orders     Order[]
+}
+
+model Language {
+ id        Int      @id @default(autoincrement())
+ name      String
+ createdAt DateTime @default(now())
+
+ books Book[]
+}
+
+model Category {
+ id        Int      @id @default(autoincrement())
+ name      String
+ createdAt DateTime @default(now())
+
+ books Book[]
+}
+
+model Author {
+ id        Int      @id @default(autoincrement())
+ name      String
+ createdAt DateTime @default(now())
+
+ books Book[]
+}
+
+model User {
+ id        Int      @id @default(autoincrement())
+ name      String
+ surname   String
+ email     String   @unique
+ password  String
+ image     String   @default("Test")
+ createdAt DateTime @default(now())
+
+ isLoggedIn Boolean @default(false)
+ isAdmin    Boolean @default(false)
+
+ orders Order[]
+
+
+ role   Role? @relation(fields: [roleId], references: [id])
+ roleId Int?
+}
+
+model Role {
+ id   Int    @id @default(autoincrement())
+ name String
+
+ users User[]
+}
+
+model Order {
+ id        Int      @id @default(autoincrement())
+ products  Book[]
+ createdAt DateTime @default(now())
+
+
+ deliveryMethod   DeliveryMethod? @relation(fields: [deliveryMethodId], references: [id])
+ deliveryMethodId Int?
+ orderStatus      OrderStatus?    @relation(fields: [orderStatusId], references: [id])
+ orderStatusId    Int?
+ paymentMethod    PaymentMethod?  @relation(fields: [paymentMethodId], references: [id])
+ paymentMethodId  Int?
+ user             User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+ userId           Int?
+
+
+}
+
+model DeliveryMethod {
+ id    Int    @id @default(autoincrement())
+ name  String
+ price Int
+
+ orders Order[]
+
+}
+
+model PaymentMethod {
+ id   Int    @id @default(autoincrement())
+ name String
+
+ orders Order[]
+}
+
+model OrderStatus {
+ id   Int    @id @default(autoincrement())
+ name String
+
+ orders Order[]
+}

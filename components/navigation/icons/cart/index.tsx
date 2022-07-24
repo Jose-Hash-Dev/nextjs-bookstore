@@ -5,7 +5,7 @@ import {
   CartIconStyle,
   MenuItemContainer,
 } from "./style";
-import { Store } from "../../../../lib/Store";
+import { Store } from "../../../../utils/Store";
 import {
   Avatar,
   Badge,
@@ -74,10 +74,10 @@ function CartIcon() {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           {cart.cartItems.map((item: any) => (
-            <MenuItemContainer key={item._id}>
+            <MenuItemContainer key={item.id}>
               <AvatarTitle>
                 <Avatar src={item.image} />
-                <Link href={`/products/${item._id}`} passHref>
+                <Link href={`/products/${item.id}`} passHref>
                   <Typography>{item.title}</Typography>
                 </Link>
               </AvatarTitle>

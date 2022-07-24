@@ -1,5 +1,5 @@
 import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import {
   NavigationContainer,
@@ -7,28 +7,22 @@ import {
   ProfileText,
   IconContainer,
 } from "./style";
-import {
-  Divider,
-  IconButton,
-  InputBase,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import NotificationIcon from "./icons/notification";
 import CartIcon from "./icons/cart";
 import ProfileIcon from "./icons/profile";
-import History from "./buttons/history";
+// import History from "./buttons/history";
 
 const NavigationView = () => {
   return (
     <NavigationContainer>
       <LogoBackContainer>
-        <History />
+        {/* <History /> */}
         <Link href={"/products"}>
-          <Typography sx={{ fontSize: 25 }}>BookStore</Typography>
+          <Typography sx={{ fontSize: 25 }}>Book Store</Typography>
         </Link>
       </LogoBackContainer>
-      <Paper
+      {/* <Paper
         component="form"
         sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
       >
@@ -40,10 +34,10 @@ const NavigationView = () => {
         <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
           <SearchIcon />
         </IconButton>
-      </Paper>
+      </Paper> */}
       <IconContainer>
         <ProfileIcon />
-        <ProfileText>Register/Login</ProfileText>
+        <ProfileText />
         <Divider orientation="vertical" variant="middle" flexItem />
         <NotificationIcon />
         <Divider orientation="vertical" variant="middle" flexItem />

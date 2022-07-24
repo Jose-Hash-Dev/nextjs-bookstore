@@ -7,7 +7,7 @@ function ProfileIcon() {
     <>
       <IconButton>
         <Badge badgeContent={0} color="error">
-          <ProfileIconStyle color="primary"/>
+          <ProfileIconStyle color="primary" />
         </Badge>
       </IconButton>
     </>
