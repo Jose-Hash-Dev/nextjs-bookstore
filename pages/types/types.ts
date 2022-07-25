@@ -6,8 +6,8 @@ export type BookType = {
   image: string;
   price: string;
   alt: string;
-  stock: number;
-  pages: number;
+  stock: string;
+  pages: string;
   languages: [
     {
       id: number;
@@ -73,6 +73,13 @@ export type DialogViewTypes = {
       name: string;
     }
   ];
+  languages: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
+  categories: [{ id: number; name: string }];
   roles: [
     {
       id: number;

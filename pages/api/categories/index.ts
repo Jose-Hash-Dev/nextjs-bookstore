@@ -1,10 +1,7 @@
-import { NextApiResponse, NextApiRequest } from "next";
-import Category from "../../../models/category";
-import dbConnect from "../../../utils/dbConnect";
+import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
 
-dbConnect().then(() => {
-  console.log("Connected");
-});
+const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,18 +10,10 @@ export default async function handler(
   const { method } = req;
   if (method === "GET") {
     try {
-      const category = await Category.find();
-      res.status(200).json(category);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  }
-  if (method === "POST") {
-    try {
-      const category = await Category.create(req.body);
-      res.status(201).json(category);
-    } catch (error) {
-      res.status(500).json(error);
+      const categories = await prisma.category.findMany();
+      res.status(200).json(categories);
+    } catch (err) {
+      res.status(500).json(err);
     }
   }
 }

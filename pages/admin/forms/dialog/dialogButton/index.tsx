@@ -1,15 +1,22 @@
 import React from "react";
 import { Button } from "@mui/material";
 
-type ButtonStyle = {
+type ButtonType = {
   buttonText: string;
-  onClickFunction?: Function;
+  onClickFunction?: () => void;
+  buttonType: string;
 };
 
-const DialogButton = ({ buttonText, onClickFunction }: ButtonStyle) => {
+const DialogButton = ({
+  buttonText,
+  onClickFunction,
+  buttonType,
+}: ButtonType) => {
   return (
     <>
-      <Button onClick={onClickFunction}>{buttonText}</Button>
+      <Button onClick={onClickFunction} type={buttonType}>
+        {buttonText}
+      </Button>
     </>
   );
 };

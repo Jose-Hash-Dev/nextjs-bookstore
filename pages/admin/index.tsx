@@ -16,22 +16,37 @@ interface TabPanelProps {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const [productsRes, usersRes, ordersRes, authorRes, rolesRes] =
-    await Promise.all([
-      fetch("http://localhost:3000/api/products"),
-      fetch("http://localhost:3000/api/users"),
-      fetch("http://localhost:3000/api/orders"),
-      fetch("http://localhost:3000/api/authors"),
-      fetch("http://localhost:3000/api/roles"),
-    ]);
-  const [products, users, orders, authors, roles] = await Promise.all([
-    productsRes.json(),
-    usersRes.json(),
-    ordersRes.json(),
-    authorRes.json(),
-    rolesRes.json(),
+  const [
+    productsRes,
+    usersRes,
+    ordersRes,
+    authorRes,
+    languageRes,
+    categoryRes,
+    rolesRes,
+  ] = await Promise.all([
+    fetch("http://localhost:3000/api/products"),
+    fetch("http://localhost:3000/api/users"),
+    fetch("http://localhost:3000/api/orders"),
+
+    fetch("http://localhost:3000/api/authors"),
+    fetch("http://localhost:3000/api/languages"),
+    fetch("http://localhost:3000/api/categories"),
+    fetch("http://localhost:3000/api/roles"),
   ]);
-  return { props: { products, users, orders, authors, roles } };
+  const [products, users, orders, authors, languages, categories, roles] =
+    await Promise.all([
+      productsRes.json(),
+      usersRes.json(),
+      ordersRes.json(),
+      authorRes.json(),
+      languageRes.json(),
+      categoryRes.json(),
+      rolesRes.json(),
+    ]);
+  return {
+    props: { products, users, orders, authors, languages, categories, roles },
+  };
 };
 
 const TabPanel = (props: TabPanelProps) => {
@@ -61,7 +76,15 @@ const a11yProps = (index: number) => {
   };
 };
 
-const AdminTabs = ({ products, users, orders, authors, roles }: any) => {
+const AdminTabs = ({
+  products,
+  users,
+  orders,
+  authors,
+  languages,
+  categories,
+  roles,
+}: any) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
@@ -86,6 +109,8 @@ const AdminTabs = ({ products, users, orders, authors, roles }: any) => {
           dialogTitle="Create Product"
           isProductRendered={true}
           authors={authors}
+          languages={languages}
+          categories={categories}
           roles={roles}
         />
         <AdminProductView bookList={products} />
@@ -94,7 +119,9 @@ const AdminTabs = ({ products, users, orders, authors, roles }: any) => {
         <DialogView
           dialogTitle="Create User"
           roles={roles}
+          languages={languages}
           authors={authors}
+          categories={categories}
           isProductRendered={false}
         />
         <AdminUsersView userList={users} />
@@ -102,9 +129,6 @@ const AdminTabs = ({ products, users, orders, authors, roles }: any) => {
       <TabPanel value={value} index={2}>
         <AdminOrderView orderList={orders} />
       </TabPanel>
-      {/* <TabPanel value={value} index={3}>
-        <AdminAuthorView authorList={authors} />
-      </TabPanel> */}
     </Box>
   );
 };

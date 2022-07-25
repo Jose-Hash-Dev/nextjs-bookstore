@@ -12,11 +12,12 @@ import CreateProductView from "../createProduct";
 import CreateUserView from "../createUser";
 
 import { ActionStyle, ContentStyle } from "./style";
-import DialogButton from "./dialogButton";
 import { DialogViewTypes } from "../../../types/types";
 
 const DialogView = ({
   authors,
+  languages,
+  categories,
   roles,
   dialogTitle,
   isProductRendered,
@@ -46,7 +47,11 @@ const DialogView = ({
         <ContentStyle>
           <DialogContentText>
             {isProductRendered ? (
-              <CreateProductView authorData={authors} />
+              <CreateProductView
+                authorData={authors}
+                languageData={languages}
+                categoryData={categories}
+              />
             ) : (
               <CreateUserView roleData={roles} />
             )}
@@ -56,10 +61,7 @@ const DialogView = ({
           sx={{
             "& > :not(style)": { m: 1 },
           }}
-        >
-          <DialogButton buttonText="Submit" onClickFunction={handleClose} />
-          <DialogButton buttonText="Cancel" onClickFunction={handleClose} />
-        </ActionStyle>
+        ></ActionStyle>
       </Dialog>
     </Box>
   );
