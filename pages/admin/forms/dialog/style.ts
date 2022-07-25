@@ -6,5 +6,5 @@ export const ActionStyle = styled(DialogActions)`
 `;
 
 export const ContentStyle = styled(DialogContent)`
-  width: 320px;
+  width: 500px;
 `;

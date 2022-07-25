@@ -1,10 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Author from "../../../models/author";
-import dbConnect from "../../../utils/dbConnect";
+import { PrismaClient } from "@prisma/client";
 
-dbConnect().then(() => {
-  console.log("Connected");
-});
+const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,18 +10,10 @@ export default async function handler(
   const { method } = req;
   if (method === "GET") {
     try {
-      const author = await Author.find();
-      res.status(200).json(author);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  }
-  if (method === "POST") {
-    try {
-      const author = await Author.create(req.body);
-      res.status(201).json(author);
-    } catch (error) {
-      res.status(500).json(error);
+      const authors = await prisma.author.findMany();
+      res.status(200).json(authors);
+    } catch (err) {
+      res.status(500).json(err);
     }
   }
 }
