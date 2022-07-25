@@ -10,11 +10,11 @@ generator client {
 model Book {
  id          Int      @id @default(autoincrement())
  title       String
- price       Int
+ price       String
  description String
  image       String
- stock       Int
- pages       Int
+ stock       String
+ pages       String
  createdAt   DateTime @default(now())
 
  languages  Language[]
@@ -61,7 +61,6 @@ model User {
 
  orders Order[]
 
-
  role   Role? @relation(fields: [roleId], references: [id])
  roleId Int?
 }
@@ -78,7 +77,6 @@ model Order {
  products  Book[]
  createdAt DateTime @default(now())
 
-
  deliveryMethod   DeliveryMethod? @relation(fields: [deliveryMethodId], references: [id])
  deliveryMethodId Int?
  orderStatus      OrderStatus?    @relation(fields: [orderStatusId], references: [id])
@@ -87,8 +85,6 @@ model Order {
  paymentMethodId  Int?
  user             User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
  userId           Int?
-
-
 }
 
 model DeliveryMethod {
@@ -97,7 +93,6 @@ model DeliveryMethod {
  price Int
 
  orders Order[]
-
 }
 
 model PaymentMethod {
