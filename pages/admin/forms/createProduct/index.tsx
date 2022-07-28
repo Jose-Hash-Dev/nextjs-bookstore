@@ -13,18 +13,7 @@ import {
 } from "@mui/material";
 import { DialogViewTypes } from "../../../types/types";
 import axios from "axios";
-
-interface FormDataType {
-  image: string;
-  title: string;
-  description: string;
-  price: string;
-  stock: string;
-  pages: string;
-  authorIds: number[];
-  languageIds: number[];
-  categoryIds: number[];
-}
+import { FormDataType } from "../types";
 
 const CreateProductView = (props: {
   authorData: DialogViewTypes["authors"];
@@ -131,6 +120,17 @@ const CreateProductView = (props: {
         onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
         value={formData.stock}
         inputProps={{ maxlength: 8 }}
+      />
+      <TextField
+        size="small"
+        minRows={4}
+        required={true}
+        id="outlined-required"
+        label="Pages"
+        variant="outlined"
+        type="number"
+        onChange={(e) => setFormData({ ...formData, pages: e.target.value })}
+        value={formData.pages}
       />
       <FormControl required={true} fullWidth>
         <InputLabel id="select-author">Author</InputLabel>
