@@ -3,9 +3,10 @@ import { DeleteButtonStyle, ChipStyle } from "./style";
 
 type IconType = {
   onClickFunction?: Function;
+  buttonText: string;
 };
 
-const DeleteIconView = ({ onClickFunction }: IconType) => {
+const DeleteIconView = ({ onClickFunction, buttonText }: IconType) => {
   return (
     <>
       <ChipStyle
@@ -13,9 +14,8 @@ const DeleteIconView = ({ onClickFunction }: IconType) => {
         color="primary"
         clickable
         icon={<DeleteButtonStyle color="primary" />}
-        label="Delete"
+        label={buttonText}
       />
-      ;
     </>
   );
 };

@@ -1,16 +1,22 @@
 import React from "react";
 import { EditButtonStyle, ChipStyle } from "./style";
 
-const EditIconView = () => {
+type IconProps = {
+  onClickFunction?: Function;
+  buttonName: string;
+  color?: string;
+};
+
+const EditIconView = ({ onClickFunction, buttonName, color }: IconProps) => {
   return (
     <>
       <ChipStyle
-        color="primary"
+        onClick={onClickFunction}
         clickable
         icon={<EditButtonStyle color="primary" />}
-        label="Edit"
+        label={buttonName}
+        color={color}
       />
-      ;
     </>
   );
 };

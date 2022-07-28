@@ -53,10 +53,10 @@ const AdminOrderView = (props: { orderList: OrderType[] }) => {
               <TableCell align="left">{order.paymentMethod.name}</TableCell>
               <TableCell align="left">{order.createdAt.slice(0, 10)}</TableCell>
               <TableCell align="center">
-                <DeleteIconView
+                <DeleteIconView buttonText="Delete"
                   onClickFunction={() => handleDelete(order.id)}
                 />
-                <EditIconView />
+                <EditIconView color="primary" buttonName="Edit"/>
               </TableCell>
             </TableRow>
           ))}

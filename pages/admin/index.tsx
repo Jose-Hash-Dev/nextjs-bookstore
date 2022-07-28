@@ -3,7 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import AdminProductView from "./products";
+import AdminProducListtView from "./products";
 import AdminUsersView from "./users";
 import AdminOrderView from "./orders";
 import { GetServerSideProps } from "next";
@@ -113,15 +113,15 @@ const AdminTabs = ({
           categories={categories}
           roles={roles}
         />
-        <AdminProductView bookList={products} />
+        <AdminProducListtView bookList={products} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DialogView
           dialogTitle="Create User"
           roles={roles}
-          languages={languages}
-          authors={authors}
-          categories={categories}
+          languages={null}
+          authors={null}
+          categories={null}
           isProductRendered={false}
         />
         <AdminUsersView userList={users} />

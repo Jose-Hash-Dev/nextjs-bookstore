@@ -55,8 +55,8 @@ const AdminUsersView = (props: { userList: UserType[] }) => {
               <TableCell align="left">No Orders</TableCell>
               <TableCell align="left">No Reviews</TableCell>
               <TableCell align="center">
-                <DeleteIconView onClickFunction={() => handleDelete(user.id)} />
-                <EditIconView />
+                <DeleteIconView buttonText="Delete" onClickFunction={() => handleDelete(user.id)} />
+                <EditIconView buttonName="Edit" color="primary"/>
               </TableCell>
             </TableRow>
           ))}

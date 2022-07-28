@@ -6,4 +6,6 @@ export const EditButtonStyle = styled(EditIcon)`
   font-size: 23px;
 `;
 
-export const ChipStyle = styled(Chip)``;
+export const ChipStyle = styled(Chip)`
+  width: 100px;
+`;
